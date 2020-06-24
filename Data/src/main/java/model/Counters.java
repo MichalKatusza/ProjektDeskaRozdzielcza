@@ -1,4 +1,4 @@
-import java.sql.Timestamp;
+package model;
 
 public class Counters {
 

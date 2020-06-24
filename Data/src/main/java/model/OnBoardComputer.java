@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.Timestamp;
 
 public class OnBoardComputer {
@@ -10,9 +12,17 @@ public class OnBoardComputer {
 
     private double distance;
 
-    private Timestamp travelStart;
+    private long travelStart;
 
-    private Timestamp travelStop;
+    private long travelStop;
+
+    public OnBoardComputer() {
+        averageSpeed = 0;
+        maxSpeed = 0;
+        averageFuelConsumption = 0;
+        distance = 0;
+        travelStart = System.currentTimeMillis();
+    }
 
     public double getAverageSpeed() {
         return averageSpeed;
@@ -46,19 +56,19 @@ public class OnBoardComputer {
         this.distance = distance;
     }
 
-    public Timestamp getTravelStart() {
+    public long getTravelStart() {
         return travelStart;
     }
 
-    public void setTravelStart(Timestamp travelStart) {
+    public void setTravelStart(long travelStart) {
         this.travelStart = travelStart;
     }
 
-    public Timestamp getTravelStop() {
+    public long getTravelStop() {
         return travelStop;
     }
 
-    public void setTravelStop(Timestamp travelStop) {
+    public void setTravelStop(long travelStop) {
         this.travelStop = travelStop;
     }
 }

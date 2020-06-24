@@ -1,8 +1,10 @@
+package model;
+
 public class Lights {
 
     private boolean turnSignalRight;
 
-    private boolean isTurnSignalLeft;
+    private boolean turnSignalLeft;
 
     private boolean positionLights;
 
@@ -23,11 +25,11 @@ public class Lights {
     }
 
     public boolean isTurnSignalLeft() {
-        return isTurnSignalLeft;
+        return turnSignalLeft;
     }
 
     public void setTurnSignalLeft(boolean turnSignalLeft) {
-        isTurnSignalLeft = turnSignalLeft;
+        this.turnSignalLeft = turnSignalLeft;
     }
 
     public boolean isPositionLights() {

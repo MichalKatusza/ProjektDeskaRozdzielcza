@@ -1,16 +1,8 @@
+package model;
+
 public class Speedometer {
 
     private float speed;
-
-
-    public void speedUp() {
-    }
-
-    public void speedDown() {
-    }
-
-
-
 
     public float getSpeed() {
         return speed;
