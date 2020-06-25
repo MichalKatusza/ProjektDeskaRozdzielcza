@@ -19,9 +19,9 @@ public class OnBoardComputer {
     public OnBoardComputer() {
         averageSpeed = 0;
         maxSpeed = 0;
-        averageFuelConsumption = 0;
+        averageFuelConsumption =0;
         distance = 0;
-        travelStart = System.currentTimeMillis();
+        travelStart = 0;
     }
 
     public double getAverageSpeed() {

@@ -6,6 +6,10 @@ public class CountersController {
 
     private Counters counters;
 
+    public CountersController() {
+        this.counters = new Counters();
+    }
+
     public void updateMileage(double value) {
         counters.setTotalMileage(counters.getTotalMileage() + value);
     }

@@ -16,6 +16,9 @@ public class Lights {
 
     private boolean fogLightsLeft;
 
+    public Lights() {
+    }
+
     public boolean isTurnSignalRight() {
         return turnSignalRight;
     }

@@ -3,27 +3,39 @@ import controllers.CountersController;
 import controllers.LightsController;
 import controllers.SpeedometerController;
 
+import java.util.Timer;
+
 public class Board {
 
-    private ComputerController computerController;
-    private CountersController countersController;
-    private LightsController lightsController;
-    private SpeedometerController speedometerController;
-
-    private boolean travel;
+    private final ComputerController computerController;
+    private final CountersController countersController;
+    private final LightsController lightsController;
+    private final SpeedometerController speedometerController;
 
     public Board() {
         this.computerController = new ComputerController();
         this.countersController = new CountersController();
         this.lightsController = new LightsController();
         this.speedometerController = new SpeedometerController();
-        this.travel = true;
+        new Timer().schedule(new Travel(computerController,countersController,speedometerController),0,1000);
     }
 
-    public void travel(){
 
-        while(travel){
-
-        }
+    public ComputerController getComputerController() {
+        return computerController;
     }
+
+    public CountersController getCountersController() {
+        return countersController;
+    }
+
+    public LightsController getLightsController() {
+        return lightsController;
+    }
+
+    public SpeedometerController getSpeedometerController() {
+        return speedometerController;
+    }
+
+
 }
