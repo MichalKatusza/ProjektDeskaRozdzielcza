@@ -30,5 +30,7 @@ public class SpeedometerController {
         return speedometer.getSpeed();
     }
 
-
+    public Speedometer getSpeedometer() {
+        return speedometer;
+    }
 }

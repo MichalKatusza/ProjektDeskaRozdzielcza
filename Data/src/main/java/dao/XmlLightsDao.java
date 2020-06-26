@@ -7,7 +7,7 @@ import java.io.*;
 
 public class XmlLightsDao implements Dao<Lights>{
 
-
+    @Override
     public Lights read() throws IOException {
         File file = new File("lights_settings.xml");
         XmlMapper xmlMapper = new XmlMapper();
@@ -15,6 +15,7 @@ public class XmlLightsDao implements Dao<Lights>{
         return xmlMapper.readValue(xml, Lights.class);
     }
 
+    @Override
     public void write(Lights obj) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.writeValue(new File("lights_settings.xml"), obj);

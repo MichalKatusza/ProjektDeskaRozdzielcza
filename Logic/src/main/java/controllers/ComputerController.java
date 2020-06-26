@@ -32,5 +32,7 @@ public class ComputerController {
         onBoardComputer.setTravelStart(value);
     }
 
-
+    public OnBoardComputer getOnBoardComputer() {
+        return onBoardComputer;
+    }
 }

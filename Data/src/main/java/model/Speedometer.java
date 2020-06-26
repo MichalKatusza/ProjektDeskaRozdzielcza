@@ -4,6 +4,10 @@ public class Speedometer {
 
     private float speed;
 
+    public Speedometer() {
+        speed = 0;
+    }
+
     public float getSpeed() {
         return speed;
     }

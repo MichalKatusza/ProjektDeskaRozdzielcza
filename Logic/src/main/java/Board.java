@@ -2,6 +2,7 @@ import controllers.ComputerController;
 import controllers.CountersController;
 import controllers.LightsController;
 import controllers.SpeedometerController;
+import dao.Jdbc;
 
 import java.util.Timer;
 
@@ -17,7 +18,7 @@ public class Board {
         this.countersController = new CountersController();
         this.lightsController = new LightsController();
         this.speedometerController = new SpeedometerController();
-        new Timer().schedule(new Travel(computerController,countersController,speedometerController),0,1000);
+        new Timer().schedule(new Travel(computerController, countersController, speedometerController), 0, 1000);
     }
 
 
@@ -37,5 +38,18 @@ public class Board {
         return speedometerController;
     }
 
+    public void saveBoard() {
+        Jdbc jdbc = new Jdbc();
+        jdbc.write(countersController.getCounters(), computerController.getOnBoardComputer(), speedometerController.getSpeedometer());
+    }
 
+    public void loadBoard() {
+        Jdbc jdbc = new Jdbc();
+        jdbc.read(countersController.getCounters(), computerController.getOnBoardComputer(), speedometerController.getSpeedometer());
+    }
+
+
+    public String toStringDoTestow() {
+        return "Liczniki: " + countersController.getCounters().getTotalMileage() + " " + countersController.getCounters().getDailyMileage();
+    }
 }

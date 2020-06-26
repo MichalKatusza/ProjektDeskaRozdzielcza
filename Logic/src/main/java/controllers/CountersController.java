@@ -22,4 +22,7 @@ public class CountersController {
         counters.setDailyMileage(0);
     }
 
+    public Counters getCounters() {
+        return counters;
+    }
 }

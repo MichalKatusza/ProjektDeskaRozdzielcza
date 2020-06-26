@@ -22,6 +22,7 @@ public class OnBoardComputer {
         averageFuelConsumption =0;
         distance = 0;
         travelStart = 0;
+        travelStop = 0;
     }
 
     public double getAverageSpeed() {

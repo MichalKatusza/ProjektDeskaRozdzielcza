@@ -2,14 +2,22 @@ package dao;
 
 import model.Counters;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Arrays;
+
 public class JdbcCountersDao implements Dao<Counters> {
 
 
-    public Counters read() {
+    @Override
+    public Counters read() throws IOException {
         return null;
     }
 
-    public void write(Counters obj) {
+    @Override
+    public void write(Counters obj) throws IOException {
 
     }
 }

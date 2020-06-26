@@ -6,6 +6,11 @@ public class Counters {
 
     private double dailyMileage;
 
+    public Counters() {
+        totalMileage = 0;
+        dailyMileage = 0;
+    }
+
     public double getTotalMileage() {
         return totalMileage;
     }
