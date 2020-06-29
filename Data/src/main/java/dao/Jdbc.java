@@ -6,9 +6,18 @@ import model.Speedometer;
 
 import java.sql.*;
 
+/***
+ *  Klasa Jdbc jest g³ówn¹ klas¹ warstwy danych. Zajmuje siê ³¹czeniem z serwerem SQL.
+ *  Tworzy i uzupe³nia tabelê w bazie danych oraz sprawdza poprawnoœæ jej utworzenia.
+ *  Udostêpnia mo¿liwoœæ zapisu i odczytu danych z bazy.
+ */
+
 public class Jdbc {
 
-
+    /***
+     * Funkcja tworz¹ca tabelê w bazie danych z odpowiednimi polami.
+     * @param connection Po³¹czenie z baz¹.
+     */
     private void createTable(Connection connection) {
         Statement statement = null;
         try {
@@ -33,7 +42,11 @@ public class Jdbc {
         System.out.println("Table created successfully");
     }
 
-
+    /***
+     * Funckcja sprawdzaj¹ca czy tabela danych zosta³a utworzona.
+     * @param connection Po³¹czenie z baz¹.
+     * @return Zwraca ,,true" je¿eli tabela zosta³a utworzona, w przeciwnym wypadku ,,false".
+     */
     private boolean checkIfTableExists(Connection connection) throws SQLException {
         DatabaseMetaData dbm = connection.getMetaData();
         ResultSet tables = dbm.getTables(null, null, "BOARD", null);
@@ -46,6 +59,12 @@ public class Jdbc {
         }
     }
 
+    /***
+     * Funkcja zapisuj¹ca aktualny stan przyrzadów deski rozdzielczej w bazie danych.
+     * @param counters Objekt liczników.
+     * @param onBoardComputer Objekt komputera pok³adowego.
+     * @param speedometer Objekt prêdkoœciomierza.
+     */
     public void write(Counters counters, OnBoardComputer onBoardComputer, Speedometer speedometer) {
         Connection connection = null;
         Statement statement = null;
@@ -57,7 +76,9 @@ public class Jdbc {
             connection.setAutoCommit(false);
 
             if (!checkIfTableExists(connection)) createTable(connection);
-
+            
+            
+            System.out.println("Saving...");
             statement = connection.createStatement();
             String sql = "INSERT INTO BOARD (TOTAL_MILEAGE,DAILY_MILEAGE,SPEED,AVERAGE_SPEED,MAX_SPEED,AVERAGE_FUEL,DISTANCE,TRAVEL_START,TRAVEL_STOP) " +
                     "VALUES (" +
@@ -84,6 +105,12 @@ public class Jdbc {
         System.out.println("Records created successfully");
     }
 
+    /***
+     * Funkcja odczytuj¹ca stan przyrzadów deski rozdzielczej z bazy danych.
+     * @param counters Objekt liczników.
+     * @param onBoardComputer Objekt komputera pok³adowego.
+     * @param speedometer Objekt prêdkoœciomierza.
+     */
     public void read(Counters counters, OnBoardComputer onBoardComputer, Speedometer speedometer) {
         Connection connection = null;
         Statement statement = null;
@@ -96,21 +123,24 @@ public class Jdbc {
             if (!checkIfTableExists(connection)) createTable(connection);
 
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * \n" + ///Wybieram rekord o nawiÄ™kszym id
+            ResultSet resultSet = statement.executeQuery("SELECT * \n" + ///Wybieram rekord o nawiêkszym id
                     "    FROM    BOARD " +
                     "    WHERE   ID = (SELECT MAX(ID)  FROM BOARD);");
 
-
-            counters.setTotalMileage(resultSet.getDouble("TOTAL_MILEAGE"));
-            counters.setDailyMileage(resultSet.getDouble("DAILY_MILEAGE"));
-            speedometer.setSpeed(resultSet.getFloat("SPEED"));
-            onBoardComputer.setAverageSpeed(resultSet.getDouble("AVERAGE_SPEED"));
-            onBoardComputer.setMaxSpeed(resultSet.getDouble("MAX_SPEED"));
-            onBoardComputer.setAverageFuelConsumption(resultSet.getFloat("AVERAGE_FUEL"));
-            onBoardComputer.setDistance(resultSet.getDouble("DISTANCE"));
-            onBoardComputer.setTravelStart(resultSet.getLong("TRAVEL_START"));
-            onBoardComputer.setTravelStop(resultSet.getLong("TRAVEL_STOP"));
-
+            if (resultSet != null) {
+                counters.setTotalMileage(resultSet.getDouble("TOTAL_MILEAGE"));
+                counters.setDailyMileage(resultSet.getDouble("DAILY_MILEAGE"));
+                speedometer.setSpeed(resultSet.getFloat("SPEED"));
+                onBoardComputer.setAverageSpeed(resultSet.getDouble("AVERAGE_SPEED"));
+                onBoardComputer.setMaxSpeed(resultSet.getDouble("MAX_SPEED"));
+                onBoardComputer.setAverageFuelConsumption(resultSet.getFloat("AVERAGE_FUEL"));
+                onBoardComputer.setDistance(resultSet.getDouble("DISTANCE"));
+                onBoardComputer.setTravelStart(resultSet.getLong("TRAVEL_START"));
+                onBoardComputer.setTravelStop(resultSet.getLong("TRAVEL_STOP"));
+            }
+            else{
+                System.out.println("Nothing to read");
+            }
             resultSet.close();
             statement.close();
             connection.close();
