@@ -19,7 +19,7 @@ public class OnBoardComputer {
     public OnBoardComputer() {
         averageSpeed = 0;
         maxSpeed = 0;
-        averageFuelConsumption =0;
+        averageFuelConsumption = 0;
         distance = 0;
         travelStart = 0;
         travelStop = 0;

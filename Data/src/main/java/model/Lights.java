@@ -17,6 +17,14 @@ public class Lights {
     private boolean fogLightsLeft;
 
     public Lights() {
+    	
+    	this.turnSignalRight = false;
+    	this.turnSignalLeft = false;
+    	this.positionLights = false;
+    	this.lowBeam = false;
+    	this.highBeams = false;
+    	this.fogLightsRight = false;
+    	this.fogLightsLeft = false;
     }
 
     public boolean isTurnSignalRight() {
