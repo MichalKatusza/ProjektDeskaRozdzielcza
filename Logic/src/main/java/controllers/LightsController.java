@@ -14,6 +14,10 @@ public class LightsController {
         this.lights = new Lights();
     }
 
+    public Lights getLights() {
+    	return this.lights;
+    }
+    
     public void switchTurnSignalRight() {
         lights.setTurnSignalRight(!lights.isTurnSignalRight());
     }
@@ -50,6 +54,44 @@ public class LightsController {
     public void loadConfig() throws IOException {
         Dao<Lights> lightsDao = new XmlLightsDao();
         this.lights = lightsDao.read();
+    }
+    
+    public boolean isTurnSignalRight() {
+        return lights.isTurnSignalRight();
+    }
+
+
+
+    public boolean isTurnSignalLeft() {
+        return lights.isTurnSignalLeft();
+    }
+
+
+
+    public boolean isPositionLights() {
+        return lights.isPositionLights();
+    }
+
+
+
+    public boolean isLowBeam() {
+        return lights.isLowBeam();
+    }
+
+
+
+    public boolean isHighBeams() {
+        return lights.isHighBeams();
+    }
+
+
+    public boolean isFogLightsRight() {
+        return lights.isFogLightsRight();
+    }
+
+
+    public boolean isFogLightsLeft() {
+        return lights.isFogLightsLeft();
     }
 
 }

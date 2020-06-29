@@ -8,19 +8,23 @@ import java.util.Timer;
 
 public class Board {
 
-    private final ComputerController computerController;
-    private final CountersController countersController;
-    private final LightsController lightsController;
-    private final SpeedometerController speedometerController;
-
+    private ComputerController computerController;
+    private CountersController countersController;
+    private LightsController lightsController;
+    private SpeedometerController speedometerController;
+    private Timer timer;
+    
     public Board() {
         this.computerController = new ComputerController();
         this.countersController = new CountersController();
         this.lightsController = new LightsController();
         this.speedometerController = new SpeedometerController();
-        new Timer().schedule(new Travel(computerController, countersController, speedometerController), 0, 1000);
+        //this.timer.schedule(new Travel(computerController, countersController, speedometerController), 0, 1000);
     }
 
+    public void killTimer(){
+        this.timer.cancel();
+    }
 
     public ComputerController getComputerController() {
         return computerController;
@@ -52,4 +56,9 @@ public class Board {
     public String toStringDoTestow() {
         return "Liczniki: " + countersController.getCounters().getTotalMileage() + " " + countersController.getCounters().getDailyMileage();
     }
+    
+    public Timer getTimer() {
+    	return this.timer;	
+    }
+
 }

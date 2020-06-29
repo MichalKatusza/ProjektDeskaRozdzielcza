@@ -11,6 +11,8 @@ public class Travel extends TimerTask {
     private SpeedometerController speedometerController;
     private long counter = 0;
 
+    public Travel() {};
+    
     public Travel(ComputerController computerController, CountersController countersController, SpeedometerController speedometerController) {
         this.computerController = computerController;
         this.countersController = countersController;
@@ -33,5 +35,7 @@ public class Travel extends TimerTask {
         computerController.updateDistance((speed*1000/3600));
 
     }
+    
+    
 
 }
